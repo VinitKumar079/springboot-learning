@@ -3,6 +3,7 @@ package com.vinit.firstbackend;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class HelloController {
@@ -25,6 +26,20 @@ public class HelloController {
     @GetMapping("/college/{collegeName}")
     public String college(@PathVariable String collegeName) {
         return "My college is " + collegeName;
+    }
+
+    @GetMapping("/add")
+    public int add(
+            @RequestParam int a,
+            @RequestParam int b) {
+        return a + b;
+    }
+
+    @GetMapping("/multiply")
+    public int multiply(
+            @RequestParam int a,
+            @RequestParam int b) {
+        return a * b;
     }
 
 }
