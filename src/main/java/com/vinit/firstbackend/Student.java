@@ -2,6 +2,10 @@ package com.vinit.firstbackend;
 
 public class Student {
 
+    public Student() {
+
+    }
+
     private String name;
     private String course;
     private int age;
@@ -21,6 +25,7 @@ public class Student {
     public String getCourse() {
         return course;
     }
+
     public int getAge() {
         return age;
     }
