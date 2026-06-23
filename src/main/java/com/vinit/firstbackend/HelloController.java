@@ -1,5 +1,7 @@
 package com.vinit.firstbackend;
 
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,5 +49,14 @@ public class HelloController {
     @PostMapping("/student")
     public Student createStudent(@RequestBody Student student) {
         return student;
+    }
+
+    @GetMapping("/students")
+    public ArrayList<Student> students() {
+        ArrayList<Student> studentsList = new ArrayList<>();
+        studentsList.add(new Student("Vinit", "Spring Boot"));
+        studentsList.add(new Student("Alice", "Java"));
+        studentsList.add(new Student("Bob", "Python"));
+        return studentsList;
     }
 }
