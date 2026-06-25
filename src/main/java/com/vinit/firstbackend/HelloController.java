@@ -1,4 +1,5 @@
 package com.vinit.firstbackend;
+
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 @RestController
 public class HelloController {
 
@@ -63,26 +66,27 @@ public class HelloController {
     @GetMapping("/load")
     public String loadData() {
 
-    studentsList.add(new Student("Vinit", "Spring Boot"));
-    studentsList.add(new Student("Rahul", "Java"));
-    studentsList.add(new Student("Aman", "React"));
-    studentsList.add(new Student("Rohit", "Python"));
+        studentsList.add(new Student("Vinit", "Spring Boot"));
+        studentsList.add(new Student("Rahul", "Java"));
+        studentsList.add(new Student("Aman", "React"));
+        studentsList.add(new Student("Rohit", "Python"));
 
-    return "Students Loaded";
+        return "Students Loaded";
     }
 
     @GetMapping("/students")
     public ArrayList<Student> getStudents() {
-    return studentsList;
+        return studentsList;
     }
 
     @PostMapping("/students")
     public String createStudent(@RequestBody Student student) {
 
-    studentsList.add(student);
+        studentsList.add(student);
 
-    return "Student Added Successfully";
+        return "Student Added Successfully";
     }
+
     @PutMapping("/students/{index}")
     public String updateStudent(
             @PathVariable int index,
@@ -91,5 +95,13 @@ public class HelloController {
         studentsList.set(index, updatedStudent);
 
         return "Student Updated Successfully";
+    }
+
+    @DeleteMapping("/students/{index}")
+    public String deleteStudent(@PathVariable int index) {
+
+        studentsList.remove(index);
+
+        return "Student Deleted Successfully";
     }
 }
