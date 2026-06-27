@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.vinit.firstbackend.service.StudentService;
 
 @RestController
 public class HelloController {
+    @Autowired
+    StudentService studentService;
 
-    ArrayList<Student> studentsList = new ArrayList<>();
+    // ArrayList<Student> studentsList = new ArrayList<>();
 
     // @GetMapping("/hello")
     // public String hello() {
@@ -66,25 +71,25 @@ public class HelloController {
     @GetMapping("/load")
     public String loadData() {
 
-        studentsList.add(new Student("Vinit", "Spring Boot"));
-        studentsList.add(new Student("Rahul", "Java"));
-        studentsList.add(new Student("Aman", "React"));
-        studentsList.add(new Student("Rohit", "Python"));
+        // studentsList.add(new Student("Vinit", "Spring Boot"));
+        // studentsList.add(new Student("Rahul", "Java"));
+        // studentsList.add(new Student("Aman", "React"));
+        // studentsList.add(new Student("Rohit", "Python"));
 
-        return "Students Loaded";
+        return studentService.loadData();
     }
 
     @GetMapping("/students")
     public ArrayList<Student> getStudents() {
-        return studentsList;
+        return studentService.getStudents();
     }
 
     @PostMapping("/students")
     public String createStudent(@RequestBody Student student) {
 
-        studentsList.add(student);
-
-        return "Student Added Successfully";
+        // studentsList.add(student);
+        return studentService.createStudent(student);
+        // return "Student Added Successfully";
     }
 
     @PutMapping("/students/{index}")
@@ -92,16 +97,16 @@ public class HelloController {
             @PathVariable int index,
             @RequestBody Student updatedStudent) {
 
-        studentsList.set(index, updatedStudent);
+        // studentsList.set(index, updatedStudent);
 
-        return "Student Updated Successfully";
+        return studentService.updateStudent(index, updatedStudent);
     }
 
     @DeleteMapping("/students/{index}")
     public String deleteStudent(@PathVariable int index) {
 
-        studentsList.remove(index);
-
-        return "Student Deleted Successfully";
+        // studentsList.remove(index);
+        return studentService.deleteStudent(index);
+        // return "Student Deleted Successfully";
     }
 }
