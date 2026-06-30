@@ -106,7 +106,7 @@ public class HelloController {
     public String deleteStudent(@PathVariable int index) {
 
         // studentsList.remove(index);
-        return studentService.deleteStudent(index);
+        return studentService.deleteStudent(index); 
         // return "Student Deleted Successfully";
     }
 }

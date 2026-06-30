@@ -1,21 +1,31 @@
 package com.vinit.firstbackend;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String name;
+    private String course;
 
     public Student() {
 
     }
 
-    private String name;
-    private String course;
-    private int age;
-    private String college;
-
     public Student(String name, String course) {
         this.name = name;
         this.course = course;
-        this.age = 20; // Default age, you can modify this as needed
-        this.college = "IPEC"; // Default college, you can modify this as needed
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -26,11 +36,15 @@ public class Student {
         return course;
     }
 
-    public int getAge() {
-        return age;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCollege() {
-        return college;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 }
