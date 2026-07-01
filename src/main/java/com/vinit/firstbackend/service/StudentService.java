@@ -1,32 +1,28 @@
 package com.vinit.firstbackend.service;
-import java.util.ArrayList;
-import org.springframework.stereotype.Service;
-import com.vinit.firstbackend.Student;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import com.vinit.firstbackend.service.StudentService;
+import org.springframework.stereotype.Service;
+
+import com.vinit.firstbackend.Student;
+import com.vinit.firstbackend.repository.StudentRepository;
 
 @Service
 public class StudentService {
-    ArrayList<Student> studentsList = new ArrayList<>();
-    public String loadData(){
-         studentsList.add(new Student("Vinit", "Spring Boot"));
-         studentsList.add(new Student("John", "Java"));
-         studentsList.add(new Student("Alice", "Python"));
-         return "Data loaded successfully";
-    }
-    public ArrayList<Student> getStudents() {
-        return studentsList;
-    }
+
+    @Autowired
+    StudentRepository studentRepository;
+
     public String createStudent(Student student) {
-        studentsList.add(student);
-        return "Student created successfully";
+
+        studentRepository.save(student);
+
+        return "Student Saved In Database";
     }
-    public String updateStudent(int index, Student updatedStudent){
-        studentsList.set(index, updatedStudent);
-        return "Student updated successfully";
-    }
-    public String deleteStudent(int index){
-        studentsList.remove(index);
-        return "Student deleted successfully";
+
+    public List<Student> getStudents() {
+
+        return studentRepository.findAll();
     }
 }

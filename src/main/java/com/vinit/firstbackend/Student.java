@@ -13,6 +13,7 @@ public class Student {
     private int id;
 
     private String name;
+
     private String course;
 
     public Student() {
@@ -20,6 +21,7 @@ public class Student {
     }
 
     public Student(String name, String course) {
+
         this.name = name;
         this.course = course;
     }
