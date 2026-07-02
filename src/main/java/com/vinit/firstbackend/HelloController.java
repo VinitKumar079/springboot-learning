@@ -116,6 +116,8 @@ package com.vinit.firstbackend;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -139,5 +141,16 @@ public class HelloController {
     public String createStudent(@RequestBody Student student) {
 
         return studentService.createStudent(student);
+    }
+
+    @GetMapping("/students/{id}")
+    public Student getStudentById(@PathVariable int id) {
+        return studentService.getStudentById(id);
+    }
+
+    @DeleteMapping("/students/{id}")
+    public String deleteStudent(@PathVariable int id) {
+
+        return studentService.deleteStudent(id);
     }
 }
