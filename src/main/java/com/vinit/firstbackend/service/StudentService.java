@@ -42,4 +42,19 @@ public class StudentService {
 
         return "Student Deleted Successfully";
     }
+
+    public String updateStudent(int id, Student updatedStudent){
+        
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if (studentOptional.isPresent()) {
+            Student existingStudent = studentOptional.get();
+            existingStudent.setName(updatedStudent.getName());
+            existingStudent.setId(updatedStudent.getId());
+            existingStudent.setEmail(updatedStudent.getEmail());
+            studentRepository.save(existingStudent);
+            return "Student Updated Successfully";
+        } else {
+            return "Student Not Found";
+        }
+    }
 }

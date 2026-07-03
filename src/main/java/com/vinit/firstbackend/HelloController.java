@@ -122,6 +122,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.http.ResponseEntity;
 
 import com.vinit.firstbackend.service.StudentService;
 
@@ -152,5 +154,15 @@ public class HelloController {
     public String deleteStudent(@PathVariable int id) {
 
         return studentService.deleteStudent(id);
+    }
+
+    @PutMapping("/students/{id}")
+    public ResponseEntity<String> updateStudent(
+            @PathVariable int id,
+            @RequestBody Student updatedStudent) {
+
+        String response = studentService.updateStudent(id, updatedStudent);
+
+        return ResponseEntity.ok(response);
     }
 }

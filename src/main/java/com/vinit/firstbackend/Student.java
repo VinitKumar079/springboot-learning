@@ -49,4 +49,14 @@ public class Student {
     public void setCourse(String course) {
         this.course = course;
     }
+
+    public Object getEmail() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
+    }
+
+    public void setEmail(Object email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
 }
