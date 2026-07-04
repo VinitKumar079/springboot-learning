@@ -1,8 +1,8 @@
-package com.vinit.firstbackend;
+// package com.vinit.firstbackend;
 
-/**
- * GenerationType
- */
-public class GenerationType {
+// /**
+//  * GenerationType
+//  */
+// public class GenerationType {
 
-}
+// }

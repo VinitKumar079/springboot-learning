@@ -124,7 +124,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.ResponseEntity;
-
+import jakarta.validation.Valid;
 import com.vinit.firstbackend.service.StudentService;
 
 @RestController
@@ -140,7 +140,7 @@ public class HelloController {
     }
 
     @PostMapping("/students")
-    public String createStudent(@RequestBody Student student) {
+    public String createStudent(@Valid @RequestBody Student student) {
 
         return studentService.createStudent(student);
     }
@@ -159,7 +159,7 @@ public class HelloController {
     @PutMapping("/students/{id}")
     public ResponseEntity<String> updateStudent(
             @PathVariable int id,
-            @RequestBody Student updatedStudent) {
+            @Valid @RequestBody Student updatedStudent) {
 
         String response = studentService.updateStudent(id, updatedStudent);
 
