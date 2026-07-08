@@ -35,6 +35,9 @@ public class StudentService {
                     new StudentNotFoundException("Student Not Found"));
 }
 
+    public List<Student> getStudentByName(String name) {
+        return studentRepository.findByName(name);
+    }
     public String deleteStudent(int id) {
 
         studentRepository.deleteById(id);

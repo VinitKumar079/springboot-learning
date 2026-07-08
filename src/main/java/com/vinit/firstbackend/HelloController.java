@@ -165,4 +165,10 @@ public class HelloController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/students/name/{name}")
+public List<Student> getStudentsByName(
+        @PathVariable String name) {
+
+    return studentService.getStudentByName(name);
+}
 }
