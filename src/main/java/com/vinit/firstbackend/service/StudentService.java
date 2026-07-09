@@ -10,6 +10,11 @@ import com.vinit.firstbackend.Student;
 import com.vinit.firstbackend.Exception.StudentNotFoundException;
 import com.vinit.firstbackend.repository.StudentRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 @Service
 public class StudentService {
 
@@ -59,4 +64,15 @@ public class StudentService {
             return "Student Not Found";
         }
     }
+    public Page<Student> getStudentsPage(int page, int size) {
+
+    Pageable pageable = PageRequest.of(page, size);
+
+    return studentRepository.findAll(pageable);
+}
+public List<Student> getStudentsSorted() {
+
+    return studentRepository.findAll(
+            Sort.by("name"));
+}
 }

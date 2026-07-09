@@ -126,6 +126,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.ResponseEntity;
 import jakarta.validation.Valid;
 import com.vinit.firstbackend.service.StudentService;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class HelloController {
@@ -170,5 +172,17 @@ public List<Student> getStudentsByName(
         @PathVariable String name) {
 
     return studentService.getStudentByName(name);
+}
+@GetMapping("/students/page")
+public Page<Student> getStudentsPage(
+        @RequestParam int page,
+        @RequestParam int size) {
+
+    return studentService.getStudentsPage(page, size);
+}
+@GetMapping("/students/sort")
+public List<Student> getStudentsSorted() {
+
+    return studentService.getStudentsSorted();
 }
 }
