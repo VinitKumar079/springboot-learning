@@ -184,5 +184,12 @@ public Page<Student> getStudentsPage(
 public List<Student> getStudentsSorted() {
 
     return studentService.getStudentsSorted();
+}   
+
+@GetMapping("/students/course/{course}")
+public List<Student> getStudentsByCourse(
+        @PathVariable String course) {
+
+    return studentService.getStudentsByCourse(course);
 }
 }

@@ -75,4 +75,8 @@ public List<Student> getStudentsSorted() {
     return studentRepository.findAll(
             Sort.by("name"));
 }
+public List<Student> getStudentsByCourse(String course) {
+
+    return studentRepository.findStudentsByCourse(course);
+}
 }
