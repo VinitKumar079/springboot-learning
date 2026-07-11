@@ -15,7 +15,7 @@ public class ErrorResponse {
     public String getMessage() {
         return message;
     }
-
+        
     public int getStatus() {
         return status;
     }

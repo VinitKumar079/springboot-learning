@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Student {
@@ -53,13 +55,24 @@ public class Student {
         this.course = course;
     }
 
-    public Object getEmail() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
-    }
+    // public Object getEmail() {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
+    // }
 
-    public void setEmail(Object email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
-    }
+    // public void setEmail(Object email) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    // }
+
+    @OneToMany(mappedBy = "student")
+    private List<Course> courses;
+    public List<Course> getCourses() {
+    return courses;
+}
+
+public void setCourses(
+        List<Course> courses) {
+    this.courses = courses;
+}   
 }

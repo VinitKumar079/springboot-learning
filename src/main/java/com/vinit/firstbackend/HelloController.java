@@ -110,24 +110,18 @@
 //         // return "Student Deleted Successfully";
 //     }
 // }
-
 package com.vinit.firstbackend;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.http.ResponseEntity;
-import jakarta.validation.Valid;
-import com.vinit.firstbackend.service.StudentService;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.vinit.firstbackend.service.StudentService;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class HelloController {
@@ -137,23 +131,26 @@ public class HelloController {
 
     @GetMapping("/students")
     public List<Student> getStudents() {
-
         return studentService.getStudents();
     }
 
     @PostMapping("/students")
-    public String createStudent(@Valid @RequestBody Student student) {
+    public String createStudent(
+            @Valid @RequestBody Student student) {
 
         return studentService.createStudent(student);
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudentById(@PathVariable int id) {
+    public Student getStudentById(
+            @PathVariable int id) {
+
         return studentService.getStudentById(id);
     }
 
     @DeleteMapping("/students/{id}")
-    public String deleteStudent(@PathVariable int id) {
+    public String deleteStudent(
+            @PathVariable int id) {
 
         return studentService.deleteStudent(id);
     }
@@ -163,33 +160,42 @@ public class HelloController {
             @PathVariable int id,
             @Valid @RequestBody Student updatedStudent) {
 
-        String response = studentService.updateStudent(id, updatedStudent);
+        String response =
+                studentService.updateStudent(
+                        id,
+                        updatedStudent);
 
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/students/name/{name}")
-public List<Student> getStudentsByName(
-        @PathVariable String name) {
+    public List<Student> getStudentsByName(
+            @PathVariable String name) {
 
-    return studentService.getStudentByName(name);
-}
-@GetMapping("/students/page")
-public Page<Student> getStudentsPage(
-        @RequestParam int page,
-        @RequestParam int size) {
+        return studentService.getStudentByName(name);
+    }
 
-    return studentService.getStudentsPage(page, size);
-}
-@GetMapping("/students/sort")
-public List<Student> getStudentsSorted() {
+    @GetMapping("/students/page")
+    public Page<Student> getStudentsPage(
+            @RequestParam int page,
+            @RequestParam int size) {
 
-    return studentService.getStudentsSorted();
-}   
+        return studentService.getStudentsPage(
+                page,
+                size);
+    }
 
-@GetMapping("/students/course/{course}")
-public List<Student> getStudentsByCourse(
-        @PathVariable String course) {
+    @GetMapping("/students/sort")
+    public List<Student> getStudentsSorted() {
 
-    return studentService.getStudentsByCourse(course);
-}
+        return studentService.getStudentsSorted();
+    }
+
+    @GetMapping("/students/course/{course}")
+    public List<Student> getStudentsByCourse(
+            @PathVariable String course) {
+
+        return studentService.getStudentsByCourse(
+                course);
+    }
 }

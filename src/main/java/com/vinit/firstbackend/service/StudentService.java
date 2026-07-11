@@ -1,8 +1,8 @@
 package com.vinit.firstbackend.service;
 
 import java.util.List;
-
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,61 +22,73 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public String createStudent(Student student) {
-
         studentRepository.save(student);
-
         return "Student Saved In Database";
     }
 
     public List<Student> getStudents() {
-
         return studentRepository.findAll();
     }
 
     public Student getStudentById(int id) {
-
-    return studentRepository.findById(id)
-            .orElseThrow(() ->
-                    new StudentNotFoundException("Student Not Found"));
-}
+        return studentRepository.findById(id)
+                .orElseThrow(() ->
+                        new StudentNotFoundException("Student Not Found"));
+    }
 
     public List<Student> getStudentByName(String name) {
         return studentRepository.findByName(name);
     }
+
     public String deleteStudent(int id) {
-
         studentRepository.deleteById(id);
-
         return "Student Deleted Successfully";
     }
 
-    public String updateStudent(int id, Student updatedStudent){
-        
-        Optional<Student> studentOptional = studentRepository.findById(id);
+    public String updateStudent(int id, Student updatedStudent) {
+
+        Optional<Student> studentOptional =
+                studentRepository.findById(id);
+
         if (studentOptional.isPresent()) {
-            Student existingStudent = studentOptional.get();
-            existingStudent.setName(updatedStudent.getName());
-            existingStudent.setId(updatedStudent.getId());
-            existingStudent.setEmail(updatedStudent.getEmail());
+
+            Student existingStudent =
+                    studentOptional.get();
+
+            existingStudent.setName(
+                    updatedStudent.getName());
+
+            existingStudent.setCourse(
+                    updatedStudent.getCourse());
+
             studentRepository.save(existingStudent);
+
             return "Student Updated Successfully";
-        } else {
-            return "Student Not Found";
         }
+
+        return "Student Not Found";
     }
-    public Page<Student> getStudentsPage(int page, int size) {
 
-    Pageable pageable = PageRequest.of(page, size);
+    public Page<Student> getStudentsPage(
+            int page,
+            int size) {
 
-    return studentRepository.findAll(pageable);
-}
-public List<Student> getStudentsSorted() {
+        Pageable pageable =
+                PageRequest.of(page, size);
 
-    return studentRepository.findAll(
-            Sort.by("name"));
-}
-public List<Student> getStudentsByCourse(String course) {
+        return studentRepository.findAll(pageable);
+    }
 
-    return studentRepository.findStudentsByCourse(course);
-}
+    public List<Student> getStudentsSorted() {
+
+        return studentRepository.findAll(
+                Sort.by("name"));
+    }
+
+    public List<Student> getStudentsByCourse(
+            String course) {
+
+        return studentRepository
+                .findStudentsByCourse(course);
+    }
 }
