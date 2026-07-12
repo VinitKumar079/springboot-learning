@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Student {
@@ -65,8 +66,10 @@ public class Student {
     //     throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
     // }
 
-    @OneToMany(mappedBy = "student")
-    private List<Course> courses;
+    @OneToMany(
+        mappedBy = "student",
+        cascade = CascadeType.ALL)
+private List<Course> courses;
     public List<Course> getCourses() {
     return courses;
 }
