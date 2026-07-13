@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vinit.firstbackend.Course;
 import com.vinit.firstbackend.Student;
 import com.vinit.firstbackend.Exception.StudentNotFoundException;
 import com.vinit.firstbackend.repository.StudentRepository;
@@ -91,4 +92,16 @@ public class StudentService {
         return studentRepository
                 .findStudentsByCourse(course);
     }
+    public String createStudent1(Student student) {
+
+    if (student.getCourses() != null) {
+        for (Course course : student.getCourses()) {
+            course.setStudent(student);
+        }
+    }
+
+    studentRepository.save(student);
+
+    return "Student Saved Successfully";
+}
 }

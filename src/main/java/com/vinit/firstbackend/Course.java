@@ -1,6 +1,7 @@
 package com.vinit.firstbackend;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Course {
@@ -13,6 +14,7 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonIgnore
     private Student student;
 
     public Course() {
