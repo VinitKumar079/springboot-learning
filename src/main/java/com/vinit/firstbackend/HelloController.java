@@ -122,7 +122,7 @@ import org.springframework.web.bind.annotation.*;
 import com.vinit.firstbackend.service.StudentService;
 
 import jakarta.validation.Valid;
-
+import com.vinit.firstbackend.dto.StudentDTO;
 @RestController
 public class HelloController {
 
@@ -198,4 +198,9 @@ public class HelloController {
         return studentService.getStudentsByCourse(
                 course);
     }
+    @GetMapping("/students/dto")
+public List<StudentDTO> getStudentDTOs() {
+
+    return studentService.getStudentDTOs();
+}
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import com.vinit.firstbackend.dto.StudentDTO;
 
 @Service
 public class StudentService {
@@ -103,5 +104,17 @@ public class StudentService {
     studentRepository.save(student);
 
     return "Student Saved Successfully";
+}
+public List<StudentDTO> getStudentDTOs() {
+
+    List<Student> students =
+            studentRepository.findAll();
+
+    return students.stream()
+            .map(student ->
+                    new StudentDTO(
+                            student.getId(),
+                            student.getName()))
+            .toList();
 }
 }
