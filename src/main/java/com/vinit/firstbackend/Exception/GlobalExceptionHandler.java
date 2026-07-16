@@ -1,30 +1,45 @@
 package com.vinit.firstbackend.Exception;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(
-            MethodArgumentNotValidException ex) {
-
-        ErrorResponse error = new ErrorResponse(
-                "Validation Failed",
-                400);
-
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
     @ExceptionHandler(StudentNotFoundException.class)
-public ResponseEntity<ErrorResponse> handleStudentNotFoundException(
-        StudentNotFoundException ex) {
+    public ResponseEntity<Map<String, Object>>
+            handleStudentNotFound(
+                    StudentNotFoundException ex) {
 
-    ErrorResponse error = new ErrorResponse(
-            ex.getMessage(),
-            404);
+        Map<String, Object> response =
+                new HashMap<>();
 
-    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-}
+        response.put("message", ex.getMessage());
+        response.put("status", 404);
+
+        return new ResponseEntity<>(
+                response,
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>>
+            handleException(Exception ex) {
+
+        Map<String, Object> response =
+                new HashMap<>();
+
+        response.put("message",
+                "Something went wrong");
+        response.put("status", 500);
+
+        return new ResponseEntity<>(
+                response,
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
