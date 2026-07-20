@@ -117,4 +117,11 @@ public List<StudentDTO> getStudentDTOs() {
                             student.getName()))
             .toList();
 }
+public Student createSampleStudent() {
+
+    return Student.builder()
+            .name("Vinit")
+            .course("Spring Boot")
+            .build();
+}   
 }

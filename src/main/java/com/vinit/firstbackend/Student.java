@@ -10,14 +10,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Student {
 
     @Id
@@ -30,14 +32,6 @@ public class Student {
     @NotBlank(message = "Course cannot be empty")
     private String course;
 
-    @OneToMany(
-            mappedBy = "student",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Course> courses;
-
-    // Constructor used in previous code
-    public Student(String name, String course) {
-        this.name = name;
-        this.course = course;
-    }
 }
